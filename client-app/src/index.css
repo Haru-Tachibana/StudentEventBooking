@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ntu-rose: #d30253;
+  --ntu-pink: #d30253;
+  --ntu-tundora: #404040;
+  --ntu-dark: #333333;
+  --ntu-black: #000000;
+  --ntu-white: #f5f5f5;
+}
+
+body {
+  @apply antialiased;
+  color: var(--ntu-tundora);
+  background-color: #f5f5f5;
+}
+
+a:hover {
+  color: var(--ntu-rose);
+}
+
+.btn-ntu {
+  background-color: var(--ntu-rose);
+  color: white;
+}
+.btn-ntu:hover {
+  background-color: var(--ntu-pink);
+}
+
+.border-ntu {
+  border-color: var(--ntu-rose);
+}
+.text-ntu {
+  color: var(--ntu-rose);
+}
+.bg-ntu-subtle {
+  background-color: rgb(229 2 120 / 0.1);
+}

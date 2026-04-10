@@ -1,0 +1,63 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: student-event-backend
+    ports:
+      - "9090:9090"
+    env_file:
+      - .env
+    environment:
+      - FIREBASE_PROJECT_ID=${FIREBASE_PROJECT_ID:-studenteventbooking}
+      - FIREBASE_SERVICE_ACCOUNT_PATH=/app/firebase-service-account.json
+
+      - WEATHER_API_KEY=${WEATHER_API_KEY:-}
+      - SKIDDLE_API_KEY=${SKIDDLE_API_KEY:-}
+      - GOOGLE_MAPS_API_KEY=${GOOGLE_MAPS_API_KEY:-}
+
+      # Local redis container
+      - SPRING_REDIS_HOST=${SPRING_REDIS_HOST:-redis}
+      - SPRING_REDIS_PORT=${SPRING_REDIS_PORT:-6379}
+      - SPRING_REDIS_PASSWORD=${SPRING_REDIS_PASSWORD:-}
+      - SPRING_REDIS_SSL=${SPRING_REDIS_SSL:-false}
+
+    volumes:
+      - ./firebase-service-account.json:/app/firebase-service-account.json:ro
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -sf http://127.0.0.1:9090/StudentEventBooking/webresources/events >/dev/null || exit 1",
+        ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 75s
+
+  redis:
+    image: redis:7-alpine
+    container_name: student-event-redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 2s
+      timeout: 1s
+      retries: 3
+
+  client:
+    build:
+      context: ./client-app
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL: ${VITE_API_BASE_URL:-http://localhost:9090/StudentEventBooking/webresources}
+    container_name: student-event-client
+    ports:
+      - "5173:80"
+    depends_on:
+      backend:
+        condition: service_healthy

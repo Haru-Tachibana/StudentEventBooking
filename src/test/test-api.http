@@ -1,0 +1,530 @@
+### Base URL
+@base = http://localhost:9090/StudentEventBooking/webresources
+
+@auth =
+
+### --- STUDENTS ---
+
+### 1. Yuyang Wang (Auth required)
+POST {{base}}/students
+Content-Type: application/json
+Authorization: Bearer {{auth}}
+
+{
+  "studentId": "N1373616",
+  "name": "Yuyang Wang",
+  "email": "yuyang@example.com"
+}
+
+### 2. Emma Clarke (Auth required)
+POST {{base}}/students
+Content-Type: application/json
+Authorization: Bearer {{auth}}
+
+{
+  "studentId": "N2001001",
+  "name": "Emma Clarke",
+  "email": "emma@example.com"
+}
+
+### 3. James Wilson (Auth required)
+POST {{base}}/students
+Content-Type: application/json
+Authorization: Bearer {{auth}}
+
+{
+  "studentId": "N2001002",
+  "name": "James Wilson",
+  "email": "james@example.com"
+}
+
+### 4. Sophie Brown (Auth required)
+POST {{base}}/students
+Content-Type: application/json
+Authorization: Bearer {{auth}}
+
+{
+  "studentId": "N2001003",
+  "name": "Sophie Brown",
+  "email": "sophie@example.com"
+}
+
+### 5. Oliver Davis (Auth required)
+POST {{base}}/students
+Content-Type: application/json
+Authorization: Bearer {{auth}}
+
+{
+  "studentId": "N2001004",
+  "name": "Oliver Davis",
+  "email": "oliver@example.com"
+}
+
+### 6. Anna Patel (Auth required)
+POST {{base}}/students
+Content-Type: application/json
+Authorization: Bearer {{auth}}
+
+{
+  "studentId": "T2001001",
+  "name": "Anna Patel",
+  "email": "anna@example.com"
+}
+
+### 7. Liam Taylor (Auth required)
+POST {{base}}/students
+Content-Type: application/json
+Authorization: Bearer {{auth}}
+
+{
+  "studentId": "T2001002",
+  "name": "Liam Taylor",
+  "email": "liam@example.com"
+}
+
+### 8. Isla Thompson (Auth required)
+POST {{base}}/students
+Content-Type: application/json
+Authorization: Bearer {{auth}}
+
+{
+  "studentId": "N2001005",
+  "name": "Isla Thompson",
+  "email": "isla@example.com"
+}
+
+### 9. Noah Martin (Auth required)
+POST {{base}}/students
+Content-Type: application/json
+Authorization: Bearer {{auth}}
+
+{
+  "studentId": "N2001006",
+  "name": "Noah Martin",
+  "email": "noah@example.com"
+}
+
+### 10. Charlotte Lee (Auth required)
+POST {{base}}/students
+Content-Type: application/json
+Authorization: Bearer {{auth}}
+
+{
+  "studentId": "T2001003",
+  "name": "Charlotte Lee",
+  "email": "charlotte@example.com"
+}
+
+### Get All Students (no auth)
+GET {{base}}/students
+
+### Get current student (Auth required) – returns profile for the authenticated user
+GET {{base}}/students/me
+Authorization: Bearer {{auth}}
+
+### Get single student by ID (no auth)
+GET {{base}}/students/N1373616
+
+### Get pending ratings for a student (no auth)
+GET {{base}}/students/N1373616/pending-ratings
+
+### --- EVENTS ---
+### Note: POST /events, register, cancel-registration, PUT, DELETE, my-events, my-registrations require Authorization: Bearer <firebase-id-token>. Publisher ID = publisher's NTU ID (set from token on create). Event ID is auto-generated (1, 2, 3, ...); do not send eventId in POST body.
+
+### Create event 1 – React Workshop (Auth required; eventId auto-generated, publisherId set from token)
+POST {{base}}/events
+Content-Type: application/json
+Authorization: Bearer {{auth}}
+
+{
+  "publisherId": "N1373616",
+  "title": "React Workshop",
+  "type": "Workshop",
+  "date": "2026-03-15",
+  "time": "14:00",
+  "duration": 180,
+  "location": "NG1 4FQ",
+  "venue": "Computer Lab A, City Campus",
+  "cost": 0.0,
+  "maxParticipants": 30,
+  "description": "Join us for an intensive React workshop covering hooks, state and component design."
+}
+
+### Create event 2 – Java Study Group (assigned id 2)
+POST {{base}}/events
+Content-Type: application/json
+Authorization: Bearer {{auth}}
+
+{
+  "publisherId": "N2001001",
+  "title": "Java Study Group",
+  "type": "Workshop",
+  "date": "2026-03-18",
+  "time": "10:00",
+  "duration": 120,
+  "location": "NG11 8NS",
+  "venue": "Main Hall, Clifton Campus",
+  "cost": 0.0,
+  "maxParticipants": 25,
+  "description": "Weekly study group for Java and Spring. Bring your laptop and questions."
+}
+
+### Create event 3 – Career Fair (assigned id 3)
+POST {{base}}/events
+Content-Type: application/json
+Authorization: Bearer {{auth}}
+
+{
+  "publisherId": "N2001002",
+  "title": "Career Fair",
+  "type": "Career",
+  "date": "2026-03-22",
+  "time": "09:00",
+  "duration": 360,
+  "location": "NG1 4BU",
+  "venue": "Newton Building, City Campus",
+  "cost": 0.0,
+  "maxParticipants": 200,
+  "description": "Employers from tech, finance and engineering. CV advice and networking."
+}
+
+### Create event 4 – Sports Day (assigned id 4)
+POST {{base}}/events
+Content-Type: application/json
+Authorization: Bearer {{auth}}
+
+{
+  "publisherId": "N2001003",
+  "title": "Sports Day",
+  "type": "Sports",
+  "date": "2026-03-25",
+  "time": "11:00",
+  "duration": 240,
+  "location": "NG11 8NS",
+  "venue": "Sports Centre, Clifton Campus",
+  "cost": 0.0,
+  "maxParticipants": 80,
+  "description": "Inter-year sports day. Football, volleyball and relay. Sign up on the day."
+}
+
+### Create event 5 – Hackathon (assigned id 5)
+POST {{base}}/events
+Content-Type: application/json
+Authorization: Bearer {{auth}}
+
+{
+  "publisherId": "N2001004",
+  "title": "24h Hackathon",
+  "type": "Workshop",
+  "date": "2026-04-01",
+  "time": "12:00",
+  "duration": 1440,
+  "location": "NG1 4FQ",
+  "venue": "Boots Library, City Campus",
+  "cost": 0.0,
+  "maxParticipants": 50,
+  "description": "Build a project in 24 hours. Prizes for best app, best design and best pitch."
+}
+
+### Get All Events (no auth)
+GET {{base}}/events
+
+### Get events with optional filters (no auth)
+GET {{base}}/events?type=Workshop
+
+###
+GET {{base}}/events?location=NG1
+
+###
+GET {{base}}/events?type=Career&location=NG1
+
+### --- MY EVENTS (Auth required) – new endpoints ---
+
+### Get events published by the current user (publisherId = student linked to token)
+GET {{base}}/events/my-events
+Authorization: Bearer {{auth}}
+
+### Get events the current user is registered for (attendees contains studentId from token)
+GET {{base}}/events/my-registrations
+Authorization: Bearer {{auth}}
+
+### --- REGISTER / CANCEL REGISTRATION (Auth required) ---
+### Register: current user (from token) is added to event attendees. Use numeric event id (1, 2, 3, ...).
+
+### Register for event 1 (send as logged-in student, e.g. N1373616)
+POST {{base}}/events/1/register
+Authorization: Bearer {{auth}}
+
+### Register for event 2
+POST {{base}}/events/2/register
+Authorization: Bearer {{auth}}
+
+### Register for event 3
+POST {{base}}/events/3/register
+Authorization: Bearer {{auth}}
+
+### Register for event 4
+POST {{base}}/events/4/register
+Authorization: Bearer {{auth}}
+
+### Register for event 5
+POST {{base}}/events/5/register
+Authorization: Bearer {{auth}}
+
+### Cancel registration – remove current user from event attendees (Auth required)
+POST {{base}}/events/1/cancel-registration
+Authorization: Bearer {{auth}}
+
+### --- UPDATE / DELETE EVENT (Auth required; only publisher can update/delete) ---
+
+### Update event 1 (body: full event; attendees/ratings preserved server-side)
+PUT {{base}}/events/1
+Content-Type: application/json
+Authorization: Bearer {{auth}}
+
+{
+  "eventId": "1",
+  "publisherId": "N1373616",
+  "title": "React Workshop (Updated)",
+  "type": "Workshop",
+  "date": "2026-03-15",
+  "time": "15:00",
+  "duration": 180,
+  "location": "NG1 4FQ",
+  "venue": "Computer Lab A, City Campus",
+  "cost": 0.0,
+  "maxParticipants": 35,
+  "description": "Updated: Join us for an intensive React workshop covering hooks, state and component design."
+}
+
+### Delete event (only publisher; use an event id you published)
+DELETE {{base}}/events/1
+Authorization: Bearer {{auth}}
+
+### Get single event (no auth) – check attendees count after register/cancel
+GET {{base}}/events/1
+
+### --- FINISHED EVENTS (past date – for rating tests) ---
+### Create these after events 1–5; they get auto-assigned ids 6, 7, 8. Use those ids in the paths below.
+
+### Past React Refresher (assigned id 6)
+POST {{base}}/events
+Content-Type: application/json
+Authorization: Bearer {{auth}}
+
+{
+  "publisherId": "N1373616",
+  "title": "React Refresher (Past)",
+  "type": "Workshop",
+  "date": "2025-01-10",
+  "time": "14:00",
+  "duration": 120,
+  "location": "NG1 4FQ",
+  "venue": "Computer Lab A, City Campus",
+  "cost": 0.0,
+  "maxParticipants": 20,
+  "description": "Past workshop. Use for rating tests."
+}
+
+### Past Java Workshop (assigned id 7)
+POST {{base}}/events
+Content-Type: application/json
+Authorization: Bearer {{auth}}
+
+{
+  "publisherId": "N2001001",
+  "title": "Java Workshop (Past)",
+  "type": "Workshop",
+  "date": "2025-01-15",
+  "time": "10:00",
+  "duration": 90,
+  "location": "NG11 8NS",
+  "venue": "Main Hall, Clifton Campus",
+  "cost": 0.0,
+  "maxParticipants": 15,
+  "description": "Past workshop. Use for rating tests."
+}
+
+### Past Career Talk (assigned id 8)
+POST {{base}}/events
+Content-Type: application/json
+Authorization: Bearer {{auth}}
+
+{
+  "publisherId": "N2001002",
+  "title": "Career Talk (Past)",
+  "type": "Career",
+  "date": "2025-02-01",
+  "time": "09:00",
+  "duration": 60,
+  "location": "NG1 4BU",
+  "venue": "Newton Building, City Campus",
+  "cost": 0.0,
+  "maxParticipants": 50,
+  "description": "Past career session. Use for rating tests."
+}
+
+### Register for finished events (Auth required – use token for N1373616, N2001001, etc. in turn). Use ids 6, 7, 8.
+POST {{base}}/events/6/register
+Authorization: Bearer {{auth}}
+
+POST {{base}}/events/7/register
+Authorization: Bearer {{auth}}
+
+POST {{base}}/events/8/register
+Authorization: Bearer {{auth}}
+
+### --- POST-EVENT RATINGS (use studentId in body) ---
+
+### Get event rating before any ratings (event 6: 0 average, 0 count)
+GET {{base}}/events/6/rating
+
+### Pending events to rate for a student
+GET {{base}}/students/N1373616/pending-ratings
+
+### Submit ratings for event 6
+POST {{base}}/events/6/ratings
+Content-Type: application/json
+
+{
+  "studentId": "N1373616",
+  "rating": 4
+}
+
+POST {{base}}/events/6/ratings
+Content-Type: application/json
+
+{
+  "studentId": "N2001001",
+  "rating": 5
+}
+
+POST {{base}}/events/6/ratings
+Content-Type: application/json
+
+{
+  "studentId": "N2001002",
+  "rating": 3
+}
+
+### Get event 6 rating after 3 ratings (average 4.0, count 3)
+GET {{base}}/events/6/rating
+
+### Submit ratings for event 7
+POST {{base}}/events/7/ratings
+Content-Type: application/json
+
+{
+  "studentId": "N2001001",
+  "rating": 5
+}
+
+POST {{base}}/events/7/ratings
+Content-Type: application/json
+
+{
+  "studentId": "N2001003",
+  "rating": 4
+}
+
+POST {{base}}/events/7/ratings
+Content-Type: application/json
+
+{
+  "studentId": "T2001001",
+  "rating": 4
+}
+
+GET {{base}}/events/7/rating
+
+### Submit ratings for event 8
+POST {{base}}/events/8/ratings
+Content-Type: application/json
+
+{
+  "studentId": "N2001002",
+  "rating": 5
+}
+
+POST {{base}}/events/8/ratings
+Content-Type: application/json
+
+{
+  "studentId": "N2001004",
+  "rating": 4
+}
+
+POST {{base}}/events/8/ratings
+Content-Type: application/json
+
+{
+  "studentId": "N1373616",
+  "rating": 5
+}
+
+GET {{base}}/events/8/rating
+
+### Pending ratings after rating (should be empty when all rated)
+GET {{base}}/students/N1373616/pending-ratings
+
+### Change rating (last write wins) – same student resubmits for event 6
+POST {{base}}/events/6/ratings
+Content-Type: application/json
+
+{
+  "studentId": "N1373616",
+  "rating": 2
+}
+
+### Rate when not attendee – N2001005 did not register for event 6 (should return 400 Bad Request)
+POST {{base}}/events/6/ratings
+Content-Type: application/json
+
+{
+  "studentId": "N2001005",
+  "rating": 4
+}
+
+### Rate upcoming event 1 (not ended – should return 400 Bad Request)
+POST {{base}}/events/1/ratings
+Content-Type: application/json
+
+{
+  "studentId": "N1373616",
+  "rating": 4
+}
+
+### Invalid rating value (must be 1–5, should return 400)
+POST {{base}}/events/7/ratings
+Content-Type: application/json
+
+{
+  "studentId": "N2001001",
+  "rating": 6
+}
+
+### Upcoming events – get rating (no ratings yet)
+GET {{base}}/events/1/rating
+
+### Get rating (event 2)
+GET {{base}}/events/2/rating
+
+### --- EXTERNAL APIs ---
+
+### Geocode UK postcode
+GET {{base}}/external/geocode?postcode=NG14FQ
+
+### Weather by postcode (Open-Meteo)
+GET {{base}}/external/weather?postcode=NG14FQ
+
+### Map embed URL by postcode (Google Maps Embed API key required)
+GET {{base}}/external/map-embed-url?postcode=NG14FQ
+
+### Map embed URL by place name
+GET {{base}}/external/map-embed-url?place=Nottingham
+
+### Reverse geocode (lat/long to postcode/display name)
+GET {{base}}/external/reverse-geocode?latitude=52.9548&longitude=-1.1581
+
+### Nearby public events (Skiddle; lat, long, radius in miles)
+GET {{base}}/external/nearby-events?latitude=52.9548&longitude=-1.1581&radius=20

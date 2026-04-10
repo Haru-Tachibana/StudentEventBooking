@@ -1,0 +1,5 @@
+add caching with Redis and enhance event and rating functionality
+
+- Added caching for geocoding, weather, and Google Maps services.
+- Enabled users to update event ratings; no longer limited to one-time submission.
+- Removed manual event ID input; event IDs are now auto-generated.
