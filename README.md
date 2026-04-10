@@ -1,4 +1,6 @@
 # Student Event Booking - follow this guide
+## Top level architecture diagram
+![toplevel-diagram](https://https://github.com/Haru-Tachibana/StudentEventBooking/blob/main/top-level%20diagram.png "Top level architecture diagram")
 
 ## 1. Set up your external API keys
 
